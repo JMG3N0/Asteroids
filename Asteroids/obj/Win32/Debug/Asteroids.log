@@ -1,6 +1,0 @@
-﻿  main.cpp
-C:\Users\Administrador\Desktop\Asteroids\Asteroids\src\main.cpp(31,39): warning C4838: la conversión de 'int' en 'float' requiere una conversión de restricción
-C:\Users\Administrador\Desktop\Asteroids\Asteroids\src\main.cpp(31,39): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroids\src\main.cpp(31,53): warning C4838: la conversión de 'int' en 'float' requiere una conversión de restricción
-C:\Users\Administrador\Desktop\Asteroids\Asteroids\src\main.cpp(31,53): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-  Asteroids.vcxproj -> C:\Users\Administrador\Desktop\Asteroids\Asteroids\bin\Win32\Debug\Asteroids.exe

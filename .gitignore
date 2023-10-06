@@ -1,2 +1,5 @@
-Asteroids\.vs
-Asteroids\Debug
+Asteroids\src\.vs
+Asteroids/src/.vs
+Asteroids\src\Debug
+Asteroids\src\bin
+Asteroids\src\obj

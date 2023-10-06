@@ -1,3 +1,4 @@
-Asteroids/src/.vs
-Asteroids/src/bin
-Asteroids/src/obj
+
+Asteroids/bin
+Asteroids/obj
+Asteroids/.vs

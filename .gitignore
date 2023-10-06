@@ -1,11 +1,3 @@
-Asteroids\src\.vs
 Asteroids/src/.vs
-src/.vs
-src\.vs
-\Asteroids\src\.vs
-/Asteroids/src/.vs
-/src/.vs
-\src\.vs
-Asteroids\src\Debug
-Asteroids\src\bin
-Asteroids\src\obj
+Asteroids/src/bin
+Asteroids/src/obj

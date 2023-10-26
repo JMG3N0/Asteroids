@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>

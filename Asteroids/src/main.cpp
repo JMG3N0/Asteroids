@@ -3,6 +3,7 @@
 typedef enum GameScreen { TITLE = 0, GAME, CREDIT, EXIT } GameScreen;
 
 
+int GameLoop();
 
 int main(){
 
@@ -58,7 +59,7 @@ int main(){
 			{
 				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 				{
-					
+					GameLoop();
 				}
 			}
 			break;

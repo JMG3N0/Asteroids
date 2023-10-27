@@ -5,15 +5,13 @@ struct Player
 {
 	Vector2 Mouse;
 	Vector2 Position;
+	Vector2 Speed;
 	int Life;
 	int Points;
-	int SpeedY;
-	int SpeedX;
-	int Acceleration;
 	int SpeedCap;
-	int Slide;
-	int Drag;
 	int height;
-	int widght;
+	int width;
+	int Pause;
+	float Acceleration;
 };
 

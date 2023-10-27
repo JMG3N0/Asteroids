@@ -4,121 +4,149 @@ void InitPlayer(Player& Player);
 
 int GameLoop() {
 	Player player;
-	int counter = 5;
 	InitPlayer(player);
+
 	while (player.Life > 0)
 	{
 		player.Mouse = GetMousePosition();
-
-		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+		
+		switch (player.Pause)
 		{
-			counter = 1;
-			if (player.Mouse.x != player.Position.x)
-			{
-				if (player.Mouse.x > player.Position.x)
-				{
-					if (player.SpeedX + player.Acceleration < player.SpeedCap)
+		case 0:
+			if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 					{
-						player.SpeedX += player.Acceleration;
-					}
-					
-				}
-				else if (player.Mouse.x < player.Position.x)
-				{
-					if (player.SpeedX - player.Acceleration > (player.SpeedCap * -1))
-					{
-						player.SpeedX -= player.Acceleration;
-					}
-				}
-			}
-			if (player.Mouse.y != player.Position.y)
-			{
-				if (player.Mouse.y > player.Position.y)
-				{
-					if (player.SpeedY + player.Acceleration < player.SpeedCap)
-					{
-						player.SpeedY += player.Acceleration;
-					}
-				}
-				else if(player.Mouse.y < player.Position.y)
-				{
-					if (player.SpeedY - player.Acceleration > (player.SpeedCap * -1))
-					{
-						player.SpeedY -= player.Acceleration;
-					}
-					
-				}
-			}
-		}
+							if (player.Mouse.x != (player.Position.x + player.width /2))
+							{
+								if (player.Mouse.x > (player.Position.x + player.width / 2))
+								{
+									if (player.Speed.x + player.Acceleration < player.SpeedCap)
+									{
+										player.Speed.x += player.Acceleration * GetFrameTime();
+									}
 
-		player.Position.x += player.SpeedX * GetFrameTime();
-		player.Position.y += player.SpeedY * GetFrameTime();
+								}
+								else if (player.Mouse.x < (player.Position.x + player.width / 2))
+								{
+									if (player.Speed.x - player.Acceleration > (player.SpeedCap * -1))
+									{
+										player.Speed.x -= player.Acceleration * GetFrameTime();
+									}
+								}
+							}
+							if (player.Mouse.y != (player.Position.y + player.height / 2))
+							{
+								if (player.Mouse.y > (player.Position.y + player.height / 2))
+								{
+									if (player.Speed.y + player.Acceleration < player.SpeedCap)
+									{
+										player.Speed.y += player.Acceleration * GetFrameTime();
+									}
+								}
+								else if (player.Mouse.y < (player.Position.y + player.height / 2))
+								{
+									if (player.Speed.y - player.Acceleration > (player.SpeedCap * -1))
+									{
+										player.Speed.y -= player.Acceleration * GetFrameTime();
+									}
 
-		if (counter > 0 && IsMouseButtonUp(MOUSE_BUTTON_RIGHT))
-		{
+								}
+							}
+					}
+					player.Position.x += player.Speed.x * GetFrameTime();
+					player.Position.y += player.Speed.y * GetFrameTime();
 
-			counter--;
-			if (player.SpeedX > 0)
-			{
-				player.SpeedX += player.Slide;
-			}
-			else if (player.SpeedX < 0)
-			{
-				player.SpeedX -= player.Slide;
-			}
-			if (player.SpeedY > 0)
-			{
-				player.SpeedY += player.Slide;
-			}
-			else if (player.SpeedY < 0)
-			{
-				player.SpeedY -= player.Slide;
-			}
+		
+						if (player.Position.y + player.height >= GetScreenHeight())
+						{
+							player.Position.y = 0;
+						}
+						else if (player.Position.y <= 0)
+						{
+							player.Position.y = GetScreenHeight() - player.height;
+						}
 			
+		
+		
+						if (player.Position.x + player.width >= GetScreenWidth())
+						{
+							player.Position.x = 0;
+						}
+						else if (player.Position.x <= 0)
+						{
+							player.Position.x = GetScreenHeight() - player.width;
+						}
+						if (player.Mouse.x >= 0 && player.Mouse.x <= 90 && player.Mouse.y >= 0 && player.Mouse.y <= 30)
+												{
+													if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+													{
+														player.Pause = 1;
+													}
+												}
+			break;
+		case 1:
+			if (player.Mouse.x >= 420 && player.Mouse.x <= 600 && player.Mouse.y >= 350 && player.Mouse.y <= 420)
+			{
+				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+				{
+					player.Pause = 0;
+				}
+			}
+			if (player.Mouse.x >= 330 && player.Mouse.x <= 700 && player.Mouse.y >= 440 && player.Mouse.y <= 480)
+			{
+				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+				{
+					return 0;
+				}
+			}
+			break;
+		default:
+			break;
 		}
-		else if (counter == 0)
-		{
-			if (player.SpeedX > 0)
-			{
-				player.SpeedX -= player.Drag;
-				if (player.SpeedX < 0)
-				{
-					player.SpeedX = 0;
-				}
-			}
-			else if (player.SpeedX < 0)
-			{
-				player.SpeedX += player.Drag;
-				if (player.SpeedX > 0)
-				{
-					player.SpeedX = 0;
-				}
-			}
-			if (player.SpeedY > 0)
-			{
-				player.SpeedY -= player.Drag;
-				if (player.SpeedY < 0)
-				{
-					player.SpeedY = 0;
-				}
-			}
-			else if (player.SpeedY < 0)
-			{
-				player.SpeedY += player.Drag;
-				if (player.SpeedY > 0)
-				{
-					player.SpeedY = 0;
-				}
-			}
-		}
-
-
+		
+			
+		
+			
 		
 
 		BeginDrawing();
 		ClearBackground(MAROON);
+		DrawRectangle(player.Position.x, player.Position.y, player.width, player.height, BLUE);
+		if (player.Pause == 0)
+		{
+			DrawRectangle(0, 0, 90, 30, DARKBLUE);
+			if (player.Mouse.x >= 0 && player.Mouse.x <= 90 && player.Mouse.y >= 0 && player.Mouse.y <= 30)
+			{
+				DrawText("Pause", 10, 5, 20, GRAY);
+			}
+			else
+			{
+				DrawText("Pause", 10, 5, 20, GOLD);
+			}
+			
+		}
+		else
+		{
+			DrawRectangle(90, 90, 844, 500, DARKBLUE);
+			DrawText("Game Paused", 230, 100, 90, GOLD);
+			if (player.Mouse.x >= 420 && player.Mouse.x <= 600 && player.Mouse.y >= 350 && player.Mouse.y <= 420)
+			{
+				DrawText(">Continue", GetScreenWidth() / 2.25, GetScreenHeight() / 2, 30, GRAY);
+			}
+			else
+			{
+				DrawText("Continue", GetScreenWidth() / 2.3, GetScreenHeight() / 2, 30, GOLD);
+			}
+			if (player.Mouse.x >= 330 && player.Mouse.x <= 700 && player.Mouse.y >= 440 && player.Mouse.y <= 480)
+			{
+				DrawText(">Return to Main Menu", GetScreenWidth() / 2.85, GetScreenHeight() / 1.7, 30, GRAY);
+			}
+			else
+			{
+				DrawText("Return to Main Menu", GetScreenWidth() / 2.9, GetScreenHeight() / 1.7, 30, GOLD);
+			}
+			
+		}
 
-		DrawRectangle(player.Position.x, player.Position.y, player.widght, player.height, BLUE);
 		EndDrawing();
 	}
 	return 0;

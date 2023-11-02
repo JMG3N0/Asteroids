@@ -12,6 +12,8 @@ struct Player
 	int height;
 	int width;
 	int Pause;
+	int Shots;
+	bool upgrade;
 	float Acceleration;
 };
 

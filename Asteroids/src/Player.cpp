@@ -12,4 +12,6 @@ void InitPlayer(Player& Player)
 	Player.height = 20;
 	Player.width = 20;
 	Player.Pause = 0;
+	Player.Shots = 3;
+	Player.upgrade = false;
 }
